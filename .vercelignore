@@ -1,0 +1,13 @@
+node_modules
+clone
+.playwright-mcp
+.agents
+docs
+scripts
+memory
+*.log
+global-extract.json
+content-extract.json
+package.json
+package-lock.json
+skills-lock.json
