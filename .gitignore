@@ -1,0 +1,24 @@
+# dependencies / build
+node_modules/
+clone/
+
+# tooling & research artifacts
+.playwright-mcp/
+.agents/
+docs/
+scripts/
+memory/
+
+# extraction dumps & logs
+global-extract.json
+content-extract.json
+*.log
+
+# root dev deps (not part of the site)
+package.json
+package-lock.json
+skills-lock.json
+
+# OS
+Thumbs.db
+.DS_Store

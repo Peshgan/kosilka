@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Косилка.by — покос травы, газона и бурьяна в Минске и области</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --g:#5aa522; --g-d:#478517; --g-b:#74c92e;
+    --ink:#2e3a2a; --body:#5a635a; --muted:#8b948a;
+    --line:#e6ece0; --soft:#f4f7f0;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Open Sans',Helvetica,Arial,sans-serif;color:var(--ink);background:#fff;font-size:15px;line-height:1.65}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1170px;margin-inline:auto;padding-inline:16px}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--g);color:#fff;font-size:15px;font-weight:700;padding:12px 28px;border-radius:4px;border:none;cursor:pointer;font-family:inherit;transition:.18s}
+  .btn:hover{background:var(--g-d)}
+  .btn svg{width:17px;height:17px}
+
+  /* top bar */
+  .topbar{padding:13px 0;border-bottom:1px solid var(--line)}
+  .topbar .wrap{display:flex;align-items:center;gap:24px}
+  .logo{display:flex;align-items:center;gap:11px;flex-shrink:0;font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.5px}
+  .logo .leaf{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--g-b),var(--g));display:grid;place-items:center}
+  .logo .leaf svg{width:24px;height:24px;color:#fff}
+  .logo b{color:var(--g)}
+  .tb-addr{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted)}
+  .tb-addr svg{width:15px;height:15px;color:var(--g);flex-shrink:0}
+  .tb-right{margin-left:auto;display:flex;align-items:center;gap:18px}
+  .tb-phone{font-size:18px;font-weight:800;color:var(--ink);white-space:nowrap}
+
+  /* nav */
+  nav.main{background:var(--g)}
+  nav.main .wrap{display:flex;align-items:stretch}
+  nav.main a{display:flex;align-items:center;color:#fff;font-size:13.5px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;padding:15px 22px;transition:background .15s;white-space:nowrap}
+  nav.main a:hover,nav.main a.active{background:rgba(0,0,0,.13)}
+  .mnav-bar{display:none}
+  .burger{display:flex;background:none;border:none;cursor:pointer;padding:13px 14px;flex-direction:column;gap:5px}
+  .burger span{width:24px;height:2px;background:#fff;border-radius:2px}
+
+  /* hero */
+  .hero{position:relative;background:#1a2a14 url('images/pokoss.webp') center/cover no-repeat;min-height:460px;display:flex;align-items:center}
+  .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,22,8,.82),rgba(12,22,8,.55) 50%,rgba(12,22,8,.1) 80%,transparent)}
+  .hero .wrap{position:relative;z-index:2;padding-block:54px}
+  .hero .tag{display:inline-block;color:var(--g-b);font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+  .hero h1{color:#fff;font-size:34px;font-weight:800;line-height:1.2;max-width:660px;margin-bottom:22px}
+  .hero ul{list-style:none;margin-bottom:26px}
+  .hero ul li{display:flex;align-items:center;gap:11px;color:#fff;font-size:17px;font-weight:600;margin-bottom:11px}
+  .hero ul li svg{width:22px;height:22px;color:var(--g-b);flex-shrink:0}
+  .hero .btn{font-size:16px;padding:14px 34px}
+
+  /* sections */
+  section.block{padding:58px 0}
+  .center{text-align:center}
+  .eyebrow{display:inline-block;color:var(--g);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px}
+  h2.title{font-size:28px;font-weight:800;color:var(--ink);line-height:1.25}
+  h3.title{font-size:23px;font-weight:800;color:var(--ink);line-height:1.3}
+  .lead-sub{color:var(--body);margin-top:12px;max-width:640px}
+  .center .lead-sub{margin-inline:auto}
+
+  /* services strip (cards) */
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:38px}
+  .svc{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;transition:.2s}
+  .svc:hover{box-shadow:0 16px 36px -20px rgba(40,80,30,.35);transform:translateY(-4px);border-color:transparent}
+  .svc img{width:100%;aspect-ratio:16/10;object-fit:cover}
+  .svc .b{padding:18px 20px 22px}
+  .svc h3{font-size:17px;font-weight:700}
+  .svc p{color:var(--body);font-size:13.5px;margin-top:8px}
+  .svc a{display:inline-flex;align-items:center;gap:5px;margin-top:12px;color:var(--g);font-weight:700;font-size:13.5px}
+  .svc a svg{width:15px;height:15px;transition:.2s}
+  .svc:hover a svg{transform:translateX(3px)}
+
+  /* two column */
+  .two{display:grid;grid-template-columns:1.1fr .9fr;gap:42px;align-items:center}
+  .two.alt{grid-template-columns:.9fr 1.1fr}
+  .two img{border-radius:8px;width:100%}
+  .check{list-style:none;margin-top:18px}
+  .check li{display:flex;gap:12px;margin-bottom:13px;color:var(--body)}
+  .check li svg{width:20px;height:20px;color:var(--g);flex-shrink:0;margin-top:2px}
+  .check li b{color:var(--ink)}
+
+  /* price */
+  .price{background:var(--soft)}
+  .ptable{width:100%;border-collapse:collapse;margin-top:24px;background:#fff;box-shadow:0 1px 0 var(--line)}
+  .ptable th{background:var(--g);color:#fff;text-align:left;padding:15px 22px;font-size:15px}
+  .ptable th:last-child{text-align:right}
+  .ptable td{padding:15px 22px;border:1px solid var(--line);font-size:15px}
+  .ptable td:last-child{text-align:right;font-weight:800;color:var(--g-d);white-space:nowrap}
+  .ptable tr:nth-child(even) td{background:var(--soft)}
+  .pnote{display:flex;gap:.6rem;align-items:center;color:var(--body);font-size:14px;margin-top:14px}
+  .pnote svg{width:18px;height:18px;color:var(--g);flex-shrink:0}
+
+  /* features (circle outline) */
+  .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:40px;text-align:center}
+  .feat .ic{width:78px;height:78px;margin:0 auto 16px;border:2px solid var(--g);border-radius:50%;display:grid;place-items:center;color:var(--g)}
+  .feat .ic svg{width:34px;height:34px}
+  .feat h4{font-size:16px;font-weight:700;margin-bottom:8px}
+  .feat p{font-size:13px;color:var(--muted);line-height:1.55}
+
+  /* steps (circle filled + number) */
+  .steps{background:var(--soft)}
+  .steps-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:40px;text-align:center}
+  .stp .ic{width:88px;height:88px;margin:0 auto 16px;background:var(--g);border-radius:50%;display:grid;place-items:center;color:#fff;position:relative}
+  .stp .ic svg{width:40px;height:40px}
+  .stp .num{position:absolute;top:-3px;right:-3px;width:28px;height:28px;background:var(--g-d);border:3px solid var(--soft);color:#fff;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700}
+  .stp h4{font-size:15px;font-weight:700}
+
+  /* reviews */
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:38px}
+  .rev{border:1px solid var(--line);border-radius:8px;padding:24px;background:#fff}
+  .rev .stars{color:#f4a623;letter-spacing:2px}
+  .rev p{color:var(--body);font-size:14px;margin-top:10px}
+  .rev .who{display:flex;align-items:center;gap:11px;margin-top:16px}
+  .rev .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--g-b),var(--g));color:#fff;display:grid;place-items:center;font-weight:700}
+  .rev .who b{display:block;font-size:14px}
+  .rev .who small{color:var(--muted);font-size:12px}
+
+  /* dark form */
+  .formband{background:#1c2b14 url('images/bg-services.webp') center/cover;position:relative;padding:50px 0}
+  .formband::before{content:'';position:absolute;inset:0;background:rgba(15,26,9,.86)}
+  .formband .wrap{position:relative;z-index:2}
+  .formband h3{color:#fff;font-size:23px;font-weight:800;max-width:620px;line-height:1.3;margin-bottom:8px}
+  .formband p{color:#c8d3bd;margin-bottom:22px}
+  .cf{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .cf input{flex:1;min-width:170px;padding:14px 16px;border:none;border-radius:4px;font-family:inherit;font-size:14px}
+  .cf .note{flex-basis:100%;color:#9fb094;font-size:12px;margin-top:2px}
+
+  /* footer */
+  footer{background:#1c2b14;color:#a9b8a0;padding:50px 0 0;font-size:14px}
+  .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px}
+  footer .logo{color:#fff}
+  .foot-about{margin-top:14px;max-width:280px;line-height:1.6}
+  .foot-c{list-style:none;margin-top:16px;display:grid;gap:11px}
+  .foot-c li{display:flex;gap:10px;align-items:flex-start}
+  .foot-c svg{width:16px;height:16px;color:var(--g-b);flex-shrink:0;margin-top:3px}
+  .foot-c a:hover{color:#fff}
+  footer h4{color:#fff;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:16px}
+  .foot-links{list-style:none;display:grid;gap:9px}
+  .foot-links a:hover{color:#fff}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:38px;padding:18px 0;text-align:center;font-size:13px;color:#74856b}
+  .done{color:var(--g-b);font-weight:700}
+
+  @media(max-width:920px){
+    .svc-grid{grid-template-columns:1fr 1fr}
+    .two,.two.alt{grid-template-columns:1fr;gap:28px}
+    .two .imgcol{order:-1}
+    .feat-grid{grid-template-columns:1fr 1fr}
+    .steps-grid{grid-template-columns:1fr 1fr 1fr}
+    .rev-grid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:640px){
+    .tb-addr{display:none}
+    nav.main .wrap{flex-direction:column;align-items:stretch;display:none;padding:0}
+    nav.main .wrap.open{display:flex}
+    nav.main a{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.14)}
+    .mnav-bar{display:flex;justify-content:flex-end;padding:0 6px}
+    .hero h1{font-size:25px}
+    h2.title{font-size:22px}
+    .svc-grid,.feat-grid,.steps-grid,.foot-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="logo" href="#"><span class="leaf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-6 5-9 16-9 0 7-4 12-9 12Z"/><path d="M4 20c2-4 5-7 9-8"/></svg></span>Косилка<b>.by</b></a>
+    <div class="tb-addr">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      Минск и Минская область
+    </div>
+    <div class="tb-right">
+      <a class="btn" href="#callback">Оставить заявку</a>
+      <a class="tb-phone" href="tel:+375291234567">+375 (29) 123-45-67</a>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="main">
+  <div class="mnav-bar"><button class="burger" id="burger"><span></span><span></span><span></span></button></div>
+  <div class="wrap" id="navmenu">
+    <a class="active" href="#">Главная</a>
+    <a href="#services">Услуги</a>
+    <a href="#prices">Цены</a>
+    <a href="#how">Как работаем</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#footer">Контакты</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="tag">Косилка.by</span>
+    <h1>Покос травы, газона и бурьяна под ключ — от 15 соток</h1>
+    <ul>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Косим, убираем и вывозим — всё включено</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Выезд на следующий день после звонка</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Фиксированная цена — от 13,5 ₽ за сотку</li>
+    </ul>
+    <a class="btn" href="#callback">Рассчитать стоимость
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="block" id="services">
+  <div class="wrap center">
+    <span class="eyebrow">Наши услуги</span>
+    <h2 class="title">Полный уход за вашей территорией</h2>
+    <p class="lead-sub">Выберите услугу — посчитаем стоимость и приедем в удобное время.</p>
+  </div>
+  <div class="wrap">
+    <div class="svc-grid">
+      <article class="svc"><img src="images/svc-pokos-travy.webp" alt="Покос травы"><div class="b"><h3>Покос травы</h3><p>Скашивание участков любого размера и сложности — от дачи до коммерческих территорий.</p><a href="#callback">Заказать <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></article>
+      <article class="svc"><img src="images/svc-pokos-gazona.webp" alt="Стрижка газона"><div class="b"><h3>Стрижка газона</h3><p>Ровная стрижка декоративного газона для частных домов и дворов.</p><a href="#callback">Заказать <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></article>
+      <article class="svc"><img src="images/svc-raschistka.webp" alt="Расчистка участка"><div class="b"><h3>Расчистка участка</h3><p>Убираем бурьян, кустарник и мелколесье, готовим заброшенную территорию к работам.</p><a href="#callback">Заказать <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></article>
+      <article class="svc"><img src="images/svc-uborka.webp" alt="Уборка территории"><div class="b"><h3>Уборка территории</h3><p>Сгребаем и убираем траву, листья и мусор — порядок без следов.</p><a href="#callback">Заказать <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></article>
+      <article class="svc"><img src="images/svc-vyvoz.webp" alt="Вывоз травы"><div class="b"><h3>Вывоз скошенного</h3><p>Грузим и вывозим скошенную траву и растительные остатки.</p><a href="#callback">Заказать <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></article>
+      <article class="svc"><img src="images/svc-sezon.webp" alt="Сезонный уход"><div class="b"><h3>Сезонный уход</h3><p>Регулярное обслуживание участка по графику весь сезон по фиксированной цене.</p><a href="#callback">Заказать <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- WHY (two col) -->
+<section class="block" style="background:var(--soft)">
+  <div class="wrap two">
+    <div>
+      <span class="eyebrow">Почему стоит косить вовремя</span>
+      <h2 class="title">Аккуратный участок — это безопасность и комфорт</h2>
+      <p class="lead-sub">Высокая трава и бурьян быстро превращают участок в проблему. Регулярный покос решает сразу несколько задач:</p>
+      <ul class="check">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Меньше риск пожара.</b> Сухая трава легко воспламеняется — скошенный участок гораздо безопаснее.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Меньше сорняков и клещей.</b> Своевременный покос сдерживает сорные растения и лишает клещей укрытия.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Ухоженный вид.</b> Ровная территория выглядит опрятно и повышает ценность участка.</span></li>
+      </ul>
+    </div>
+    <div class="imgcol"><img src="images/svc-sezon.webp" alt="Ухоженный участок"></div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section class="block price" id="prices">
+  <div class="wrap two alt">
+    <div class="imgcol"><img src="images/svc-raschistka.webp" alt="Покос техникой"></div>
+    <div>
+      <span class="eyebrow">Прозрачные цены</span>
+      <h2 class="title">Чем больше участок — тем ниже цена за сотку</h2>
+      <p class="lead-sub">Итоговая стоимость зависит от высоты травы, рельефа и количества препятствий на участке. Точную цену назовём после короткого разговора.</p>
+      <div class="pnote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Замер и расчёт стоимости — бесплатно.</div>
+    </div>
+  </div>
+  <div class="wrap">
+    <table class="ptable">
+      <thead><tr><th>Вид работ</th><th>Стоимость</th></tr></thead>
+      <tbody>
+        <tr><td>Покос бурьяна</td><td>от 20 ₽</td></tr>
+        <tr><td>Покос травы до 20 см</td><td>от 13,5 ₽</td></tr>
+        <tr><td>Покос травы 20–40 см</td><td>от 15 ₽</td></tr>
+        <tr><td>Покос травы свыше 40 см</td><td>по договорённости</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="block">
+  <div class="wrap center">
+    <span class="eyebrow">Преимущества</span>
+    <h2 class="title">Почему выбирают Косилку</h2>
+  </div>
+  <div class="wrap">
+    <div class="feat-grid">
+      <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></div><h4>Быстрый выезд</h4><p>Реагируем в день заявки, приезжаем уже на следующий</p></div>
+      <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></div><h4>Любые объёмы</h4><p>Беремся за участки любой площади и сложности</p></div>
+      <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div><h4>Цена без сюрпризов</h4><p>Стоимость фиксируем заранее — без доплат на месте</p></div>
+      <div class="feat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v10H3zM3 11h18"/></svg></div><h4>Чисто после нас</h4><p>Уборка и вывоз скошенного входят в стоимость</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="block steps" id="how">
+  <div class="wrap center">
+    <span class="eyebrow">Как мы работаем</span>
+    <h2 class="title">Всего четыре шага до результата</h2>
+  </div>
+  <div class="wrap">
+    <div class="steps-grid">
+      <div class="stp"><div class="ic"><span class="num">1</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></div><h4>Заявка</h4></div>
+      <div class="stp"><div class="ic"><span class="num">2</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>Расчёт и дата</h4></div>
+      <div class="stp"><div class="ic"><span class="num">3</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.6 5.6l-6.4 6.4 2 2 6.4-6.4a4 4 0 0 0 5.6-5.6l-2.5 2.5-2-2z"/></svg></div><h4>Косим и убираем</h4></div>
+      <div class="stp"><div class="ic"><span class="num">4</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-6 0v4M5 9h14l1 11H4z"/><path d="m9 13 2 2 4-4"/></svg></div><h4>Готово</h4></div>
+      <div class="stp"><div class="ic"><span class="num">5</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div><h4>Оплата за результат</h4></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="block" id="reviews">
+  <div class="wrap center">
+    <span class="eyebrow">Отзывы</span>
+    <h2 class="title">Что говорят клиенты</h2>
+  </div>
+  <div class="wrap">
+    <div class="rev-grid">
+      <div class="rev"><div class="stars">★★★★★</div><p>«Заказывала покос дачи — приехали на следующий день, всё скосили и увезли траву. Участок не узнать!»</p><div class="who"><span class="av">А</span><div><b>Анна</b><small>Минский район</small></div></div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>«Бурьян был выше пояса. Думал, провожусь несколько дней — управились за пару часов, цена честная.»</p><div class="who"><span class="av">С</span><div><b>Сергей</b><small>Заславль</small></div></div></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>«Берём сезонное обслуживание двора у офиса. Косят по графику, всегда аккуратно. Надёжные ребята.»</p><div class="who"><span class="av">И</span><div><b>Игорь</b><small>Минск</small></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DARK FORM -->
+<section class="formband" id="callback">
+  <div class="wrap">
+    <h3>Оставьте телефон — посчитаем стоимость покоса бесплатно</h3>
+    <p>Перезвоним в течение 15 минут, уточним детали участка и согласуем удобное время выезда.</p>
+    <form class="cf" id="callbackForm">
+      <input type="text" name="name" placeholder="Ваше имя" required>
+      <input type="tel" name="phone" placeholder="Ваш телефон" required>
+      <button class="btn" type="submit">Получить расчёт</button>
+      <span class="note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</span>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="wrap foot-grid">
+    <div>
+      <a class="logo" href="#"><span class="leaf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-6 5-9 16-9 0 7-4 12-9 12Z"/></svg></span>Косилка<b style="color:var(--g-b)">.by</b></a>
+      <p class="foot-about">Покос травы, бурьяна и газона, расчистка и уборка участков в Минске и Минской области.</p>
+    </div>
+    <div>
+      <h4>Контакты</h4>
+      <ul class="foot-c">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Минск и Минская область</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg><a href="tel:+375291234567">+375 (29) 123-45-67</a></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg><a href="mailto:info@kosilka.by">info@kosilka.by</a></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Пн–Вс · 8:00–22:00</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Услуги</h4>
+      <ul class="foot-links">
+        <li><a href="#services">Покос травы</a></li>
+        <li><a href="#services">Стрижка газона</a></li>
+        <li><a href="#services">Расчистка участка</a></li>
+        <li><a href="#services">Уборка территории</a></li>
+        <li><a href="#services">Вывоз скошенного</a></li>
+        <li><a href="#services">Сезонный уход</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">© Косилка.by, 2026. Покос травы в Минске и области.</div>
+</footer>
+
+<script>
+  document.getElementById('burger').addEventListener('click', () =>
+    document.getElementById('navmenu').classList.toggle('open'));
+  document.querySelectorAll('#navmenu a').forEach(a =>
+    a.addEventListener('click', () => document.getElementById('navmenu').classList.remove('open')));
+  const f = document.getElementById('callbackForm');
+  f.addEventListener('submit', e => {
+    e.preventDefault();
+    f.innerHTML = '<p class="done">✓ Заявка отправлена! Перезвоним вам в ближайшее время.</p>';
+  });
+</script>
+</body>
+</html>
